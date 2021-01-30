@@ -2,3 +2,4 @@ discord.py[voice]
 substring
 requests
 nltk
+websockets
