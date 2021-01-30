@@ -49,11 +49,11 @@ def set_default_pose():
     }
 
 def move_character(instructions: Dict[str, float], time: int):
-    return (
-        f"""
-        setTimeout(() => animator.setTarget({instructions}),
-        {time}
-        );
-        """
-    )
+    return ''.join([
+        "setTimeout(() => {",
+        f"animator.setTarget({instructions})",
+        "},",
+        f"{time}",
+        ");"
+    ])
 
