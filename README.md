@@ -1,4 +1,4 @@
-# Team-3
+# Team 3 - Discord ASL Translator Bot
 [![Documentation Status](https://readthedocs.org/projects/team-3/badge/?version=latest)](https://team-3.readthedocs.io/en/latest/?badge=latest)
 
 Official Documentation for team 3 (latest build): https://team-3.readthedocs.io/en/latest/
