@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 def set_default_pose():
     """Set the character to the default position"""
@@ -48,12 +48,16 @@ def set_default_pose():
         "lt0x": 0, "lt0y": 0, "lt1x": 0, "lt1y": 0, "lt2x": 0 #thumb
     }
 
-def move_character(instructions: Dict[str, float], time: int):
-    return ''.join([
-        "setTimeout(() => {",
-        f"animator.setTarget({instructions})",
-        "},",
-        f"{time}",
-        ");"
-    ])
+def move_character(instructions: List[Dict[str, float]], time: int) -> str:
+    s = ""
+    for i, instruction in enumerate(instructions):
+        s += ''.join([
+            "(() => {setTimeout(() => {", '\n',
+            f"animator.setTarget({instruction})", '\n',
+            "},",'\n',
+            f"{time * i}",'\n',
+            ")})();"
+        ])
+    print(s)
+    return s
 
