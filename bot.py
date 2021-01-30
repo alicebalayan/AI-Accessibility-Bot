@@ -14,7 +14,8 @@ import json
 import time
 
 TOKEN = open("token.txt").read()
-
+GIFToken=open("gifKey.txt").read()
+URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
 # This list is probably incomplete, but these are the words that just don't exist at all in ASL
 REMOVED_WORDS = ['a','an', 'the','is','am','be','are']
 
@@ -93,6 +94,16 @@ class MyClient(discord.Client):
 
 		f.write(json.dumps(data,indent=4))
 		f.close()
+		if message.content.startswith("!asl"):
+			endQuery=' @ Sign with Robert"'
+			
+			query=URL+message.content[4:].strip()+endQuery
+			response=requests.get(query)
+			response=json.loads(response.content)
+			print(query)
+			# print(response)
+			await message.channel.send(response["data"][0]["embed_url"])
+
 		
 	async def on_member_join(self,member):
 		print("new member joined")
