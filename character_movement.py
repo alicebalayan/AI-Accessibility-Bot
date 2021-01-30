@@ -6,9 +6,9 @@ def close_thumb():
     return {'rt0x': 1, 'rt0y': 1, 'rt1x': 1, 'rt1y': 1, 'rt2x': 1}
 
 def move_character(instructions: Dict[str, float], time: int):
-    return f"""
+    return (f"""
     setTimeout(() => animator.setTarget({instructions}),
     {time}
     );
-    """
+    """)
 
