@@ -39,8 +39,6 @@ def process_content(text):
 	except Exception as e:
 		print(str(e))
 
-<<<<<<< HEAD
-=======
 # Takes a list of tagged words and does the following:
 #	1. Removes words that aren't used in ASL (articles such as "the" or "a", be verbs such as "be" and "am")
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
@@ -72,7 +70,6 @@ def pseudo_translate(tagged):
 
 	return list(map(lambda x: x.upper(), words))
 
->>>>>>> translator
 
 class MyClient(discord.Client):
 	async def on_ready(self):
