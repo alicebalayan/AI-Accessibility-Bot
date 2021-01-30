@@ -1,6 +1,8 @@
 import discord
 import threading
 import asyncio
+import nltk
+from nltk.tokenize import sent_tokenize, word_tokenize 
 from discord import channel
 import substring
 import random
@@ -10,12 +12,21 @@ import aiohttp
 from io import BytesIO
 from requests.sessions import session
 
-
 TOKEN = open("token.txt").read()
 
+# custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
 
-		
 
+def process_content(text):
+	tokenized = word_tokenize(text)
+	try:
+		for i in tokenized[:5]:
+			words = nltk.word_tokenize(i)
+			tagged = nltk.pos_tag(words)
+			print(tagged)
+			
+	except Exception as e:
+		print(str(e))
 
 class MyClient(discord.Client):
 	
@@ -29,6 +40,7 @@ class MyClient(discord.Client):
 		if message.author == self.user:
 			return
 		print(message.content)
+		process_content(str(message.content))
 		
 	async def on_member_join(self,member):
 		print("new member joined")
