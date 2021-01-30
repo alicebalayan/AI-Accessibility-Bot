@@ -31,10 +31,7 @@ class MyClient(discord.Client):
 		print(message.content)
 		
 	async def on_member_join(self,member):
-		await member.create_dm()
-		await member.dm_channel.send(
-			f'Hi {member.name}, poopi welcomes you!'
-		)
+		print("new member joined")
 	
 
 client = MyClient()
