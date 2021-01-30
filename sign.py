@@ -22,6 +22,7 @@ def main():
     
     driver.execute_script(move.move_character(hand_movement.bring_forward(), 1500))
     driver.execute_script(move.move_character(hand_movement.close_right_thumb(), 1500))
+    driver.execute_script(move.move_character(move.set_default_pose(), 1500))
 
 if __name__ == "__main__":
     main()
