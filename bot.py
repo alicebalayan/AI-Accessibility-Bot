@@ -26,6 +26,39 @@ PHRASE_ENDS = ['.',',',';',':']
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
 
+pos_to_lex = {
+	"CC"  : "Minor",
+	"CD"  : "Number",
+	"DT"  : "Minor",
+	"EX"  : "Adverb",
+	"FW"  : "Noun",
+	"IN"  : "Minor",
+	"JJ"  : "Adjective",
+	"JJR" : "Adjective",
+	"JJS" : "Adjective",
+	"MD"  : "Verb",
+	"NN"  : "Noun",
+	"NNP" : "Noun",
+	"NNPS": "Noun",
+	"NNS" : "Noun",
+	"PDT" : "Minor",
+	"PRP" : "Minor",
+	"PRP$": "Minor",
+	"RB"  : "Adjective",
+	"RP"  : "Minor",
+	"UH"  : "Minor",
+	"VB"  : "Verb",
+	"VBD" : "Verb",
+	"VBG" : "Verb",
+	"VBN" : "Verb",
+	"VBP" : "Verb",
+	"VBZ" : "Verb",
+	"WDT" : "Minor",
+	"WP"  : "Minor",
+	"WP$" : "Minor",
+	"WRB" : "Minor"
+}
+
 
 # custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
 
@@ -51,11 +84,13 @@ def process_content(text):
 #	1. Removes words that aren't used in ASL (articles such as "the" or "a", be verbs such as "be" and "am")
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
 # 		Note, this is a naiive approach and should probably be changed at some point.
+#	3. Uses reduplication for plurals (when it encounters a plural noun, such as "dogs", it does the sign twice) TODO
 #	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big" TODO
 #	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last" TODO
 #	5. Changes some word ordering, specifically for:
 #		a. Time.  In ASL, timing words come first.  So rather than "I washed my car last week" it's WEEK-LAST I WASH CAR
 #		b. Possibly other things? More research required
+
 def pseudo_translate(tagged):
 
 	# Remove unused words
@@ -65,10 +100,12 @@ def pseudo_translate(tagged):
 	# Add superlatives
 	words = []
 	for tag in tagged:
-		words.append(tag[0][0])
+		words.append(tag[0])
 		#print(tag[0][1])
 		if tag[0][1] == 'JJS':
-			words.append('top')
+			words.append(('top','JJ'))
+
+	# TODO Add reduplication of plural nouns
 
 	# TODO convert superlatives and comparatives to their roots (ie "bigger" --> "big")
 
@@ -77,18 +114,28 @@ def pseudo_translate(tagged):
 	# Change time ordering 
 	for i in range(len(words)):
 		word = words[i]
-		if word in TIME_WORDS:
+		if word[0] in TIME_WORDS:
 			move_to_start_of_sentence(words, i)
 
-	# print(words)
+	# Convert Parts of Speech to Lexical Classes
+	return_words = []
+	for word in words:
+		word = list(word)
+		if word[1] in pos_to_lex:
+			print(word[1])
+			word[1] = pos_to_lex.get(word[1])
+		else:
+			word[1] = "Symbol"
+		
+		return_words.append([word[0], word[1]])
 
-	return list(map(lambda x: x.upper(), words))
+	return return_words
 
 # Takes list of words, and position of word to be moved
 def move_to_start_of_sentence(words, pos):
 	i = pos
 	while (i > 0):
-		if words[i] in PHRASE_ENDS:
+		if words[i][0] in PHRASE_ENDS:
 			word = words.pop(pos)
 			words.insert(i+1, word)
 			return
