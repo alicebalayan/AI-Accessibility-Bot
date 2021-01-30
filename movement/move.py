@@ -1,7 +1,7 @@
 from typing import Dict
 
 def set_default_pose():
-    """Set the character to the default position"
+    """Set the character to the default position"""
     return {
         #head and body
         "hrx": 0, "hry": 0, #neck rotation
