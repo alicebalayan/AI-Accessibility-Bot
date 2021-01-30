@@ -10,6 +10,8 @@ from discord.ext import commands
 import aiohttp
 from io import BytesIO
 from requests.sessions import session
+import json
+import time
 
 TOKEN = open("token.txt").read()
 
@@ -42,9 +44,13 @@ class MyClient(discord.Client):
 		process_content(str(message.content))
 		# global data
 		# print(data)
-		
+		data={
+			"time":time.time(),
+			"data":message.content
+		}
 		f = open("data", "w")
-		f.write(message.content)
+
+		f.write(json.dumps(data,indent=4))
 		f.close()
 		
 	async def on_member_join(self,member):
