@@ -1,9 +1,7 @@
 import discord
 import threading
-import asyncio
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize 
-import websockets
 from discord import channel
 import substring
 import random
@@ -29,28 +27,25 @@ def process_content(text):
 	except Exception as e:
 		print(str(e))
 
+
 class MyClient(discord.Client):
-	# async def socket(self,websocket,path):
-    #     # content=""
-    #     # while true:
-    #     #     await asyncio.sleep(2)
-    #     pass
-        
 	async def on_ready(self):
 		print(f'{self.user} has connected to Discord!')
 		print('Servers connected to:')
 		for server in client.guilds:
 			print(server)
-        
-        # start_server = websockets.serve(self.socket, host=None,port=8765)
 
-        # asyncio.get_event_loop().run_until_complete(start_server)
-        # asyncio.get_event_loop().run_forever()
 	async def on_message(self,message):	
 		if message.author == self.user:
 			return
-		print(message.content)
+		# print(message.content)
 		process_content(str(message.content))
+		# global data
+		# print(data)
+		
+		f = open("data", "w")
+		f.write(message.content)
+		f.close()
 		
 	async def on_member_join(self,member):
 		print("new member joined")
