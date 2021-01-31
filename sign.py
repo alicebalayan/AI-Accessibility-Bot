@@ -33,6 +33,7 @@ def main():
         word = p.loc[p["EntryID"] == input()] 
         word_to_asl(word)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
+    driver.close()
 
 def word_to_asl(word: DataFrame) -> None:
     begin, to = dict(), dict()
@@ -52,7 +53,7 @@ def word_to_asl(word: DataFrame) -> None:
         elif word["MinorLocation.2.0"].item() == "Hand":
             begin.update(hand_movement.right_hand_location["Mouth"])
         else:
-            raise Exception("IMPLEMENT THIS")
+            print("IMPLEMENT THIS")
         if word["SecondMinorLocation.2.0"].item() == "HeadAway":
             to.update({'rhx': 2, 'rhy': 0, 'rhz':2, 'rh': 3})
     if word["RepeatedMovement.2.0"].item() == 1:
