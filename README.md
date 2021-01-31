@@ -41,3 +41,4 @@ Our ASL Discord Bot relies on this [database](https://asl-lex.org/) to get relev
 ### Gifs Support
 Our  ASL Discord Bot support a subset of ASL gifs that contain most common phrases and slang to keep ASL fun. Because who doesn't want fun? To learn how to run the commands, refer to the documentation about the bot. 
 We are using [giphy](https://giphy.com/signwithrobert/) and narrowing down the search to the "Sign with Robert" content as it is the most relevant and accurate. 
+[Home Run By Sign with Robert](http://gph.is/2j6qHob)
