@@ -91,9 +91,9 @@ def make_moves(words):
         if to_parse in legal_words:
             word = p.loc[p["EntryID"] == to_parse] 
             word_to_asl(word)
+            time.sleep(2)
         else:
             fingerspell(to_parse)
-        time.sleep(2)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
 
 
@@ -178,6 +178,7 @@ def fingerspell(word):
             letters[i] = hand_movement.alphabet[word[i].upper()]
     
     driver.execute_script(move.move_character(letters, 500))
+    time.sleep(len(word)*0.5)
     
 
         
