@@ -17,6 +17,10 @@ import pandas as pd
 pd.options.display.max_columns = None
 pd.set_option('display.max_rows', 10)
 
+from nltk.tokenize import RegexpTokenizer
+
+TOKENIZER = RegexpTokenizer('(?u)\W+|\$[\d\.]+|\S+')
+
 p = pd.read_csv("signdata.csv",encoding='ISO-8859-1')
 
 TOKEN = open("token.txt").read()
@@ -24,10 +28,10 @@ TOKEN = open("token.txt").read()
 # This list is probably incomplete, but these are the words that just don't exist at all in ASL/will more often than not be skipped
 REMOVED_WORDS = ['a','an', 'the','is','am','be','are', 'to']
 
-time_words_file = open('time_words.txt', 'r')
+time_words_file = open('files/time_words.txt', 'r')
 TIME_WORDS = time_words_file.read().split()
 
-PHRASE_ENDS = ['.',',',';',':']
+PHRASE_ENDS = ['.',',',';',':','?','!']
 
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
@@ -71,6 +75,7 @@ pseudo_ASL = []
 
 # Takes an English string and converts it to pseudo ASL
 def process_content(text):
+	print(text)
 	tokenized = word_tokenize(text)
 	tagged = []
 	try:
@@ -78,7 +83,9 @@ def process_content(text):
 			# Not sure why, but the words need to be tokenized twice.  This is just how they did it in the tutorial I watched /shrug
 			word = nltk.word_tokenize(i)
 			tagged.append(nltk.pos_tag(word))
-		#print(tagged)
+		# regex_tokenize = TOKENIZER.tokenize(text)
+		# tagged = nltk.pos_tag(regex_tokenize)
+		print(tagged)
 
 		pseudo_ASL = pseudo_translate(tagged)
 
@@ -118,7 +125,7 @@ def process_content(text):
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
 # 		Note, this is a naiive approach and should probably be changed at some point.
 #	3. Uses reduplication for plurals (when it encounters a plural noun, such as "dogs", it does the sign twice) TODO
-#	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big" TODO
+#	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big"
 #	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last" TODO
 #	5. Changes some word ordering, specifically for:
 #		a. Time.  In ASL, timing words come first.  So rather than "I washed my car last week" it's WEEK-LAST I WASH CAR
@@ -140,20 +147,50 @@ def pseudo_translate(tagged):
 
 	# TODO Add reduplication of plural nouns
 
-	# TODO convert superlatives and comparatives to their roots (ie "bigger" --> "big")
+	# convert superlatives and comparatives to their roots (ie "bigger" --> "big")
+	list_words = [None] * len(words)
+	for i in range(len(words)):
+		word = words[i]
+		print(word[0])
+		print(word[1])
+		if word[0][:-2] in ADJECTIVES and word[-2:] == 'er':
+			print("ENDS WITH ER")
+			new_word = word[0][:-2]
+			if new_word[-1] == 'i':
+				new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		elif word[0][-3] in ADJECTIVES and word[-2:] == 'er':
+			print("ENDS WITH ER")
+			new_word = word[0][:-3]
+			if new_word[-1] == 'i':
+				new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		elif word[0][:-3] in ADJECTIVES and word[-3:] == 'est':
+			new_word = word[0][:-3]
+			if new_word[-1] == 'i':
+				new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		elif word[0][-4] in ADJECTIVES and word[-3:] == 'est':
+			new_word = word[0][:-4]
+			if new_word[-1] == 'i':
+				new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		else:
+			list_words[i] = [word[0], word[1]]
+			
+	# convert verbs to their roots (ie "jumped" --> "jump")
 
 	# TODO check for word pairs
 
 	# Change time ordering 
-	for i in range(len(words)):
-		word = words[i]
+	for i in range(len(list_words)):
+		word = list_words[i]
 		if word[0] in TIME_WORDS:
-			move_to_start_of_sentence(words, i)
+			move_to_start_of_sentence(list_words, i)
 
 	# Convert Parts of Speech to Lexical Classes
 	return_words = []
-	for word in words:
-		word = list(word)
+	for word in list_words:
 		# TODO it thinks "jump" is a noun for some reason
 		if word[1] in pos_to_lex:
 			#print(word[1])
