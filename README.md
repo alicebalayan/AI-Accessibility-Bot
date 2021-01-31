@@ -6,6 +6,7 @@
     + [Quick Set Up](#quick-set-up)
     + [Invite The Bot To Your Discord Server](#invite-the-bot-to-your-discord-server)
     + [ASL Discord Bot Documentation](#asl-discord-bot-documentation)
+    + [Natural Language Processing](#natural-language-processing)
     + [2D Animation](#2d-animation)
     + [ASL Database](#asl-database)
     + [Gifs Support](#gifs-support)
@@ -32,6 +33,9 @@ Then the bot will wake up.
 ### ASL Discord Bot Documentation
 (rtd link here) 
 
+### Natural Language Processing
+Our ASL Bot processes the words in the following way: removes words that aren't used, adds superlatives, converts superlatives to their roots, checks for word pairs (good morning), looks for words that mean time. 
+
 ### 2D Animation
 Our ASL Discord Bot uses this [JS library](https://github.com/aslfont/sign-puppet) to display 2D animations to the user. 
 (add code snippet here on the final day)
@@ -46,3 +50,10 @@ We are using [giphy](https://giphy.com/signwithrobert/) and narrowing down the s
 [Home Run By Sign with Robert](http://gph.is/2j6qHob)
 ### Security
 All of the auth keys are stored privately and not shared with anyone else outside of the development team. In addition, no user's information is been stored (audio recording).
+### Code snippets
+Capturing the audio and zipping the file 
+```Python
+if message.content.startswith("!stop"):
+			await message.channel.send(".end")
+			url="http://localhost:3004/"+servers[guild]["recordingID"]+"?format=flac&container=aupzip"
+   ```
