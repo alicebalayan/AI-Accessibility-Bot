@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Tuple
 
 right_hand_location = {
     "Forehead": [0,-2,0,3],
@@ -71,3 +71,6 @@ def bring_right_hand_forward() -> Dict[str, float]:
         'rrx'  : 90,
     }
 
+def convert_x_y_to_rh(x: float, y: float) -> Tuple[float, float]:
+    return (-(x - 187) / 26.6, (y - 133) / 26.66)
+    
