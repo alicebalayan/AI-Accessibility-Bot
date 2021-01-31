@@ -3,3 +3,4 @@ substring
 requests
 nltk
 websockets
+pandas
