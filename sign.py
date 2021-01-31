@@ -1,3 +1,4 @@
+from movement.hand_movement import bring_right_hand_forward
 from pandas.core.frame import DataFrame
 from selenium.webdriver.firefox.webdriver import WebDriver
 from movement import move, hand_movement
@@ -25,23 +26,39 @@ def main():
     );
     """)
 
-    word_to_asl(hello)
     
-    driver.execute_script(move.move_character(hand_movement.bring_right_hand_forward(), 1500))
-    driver.execute_script(move.move_character(hand_movement.close_right_thumb(), 1500))
+    # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
+    while True:
+        driver.execute_script(move.move_character([move.set_default_pose()], 1000))
+        word = p.loc[p["EntryID"] == input()] 
+        word_to_asl(word)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
 
 def word_to_asl(word: DataFrame) -> None:
-    position = {}
+    begin, to = dict(), dict()
     if word["SignType.2.0"].item() == ("OneHanded"):
+        begin.update(hand_movement.bring_right_hand_forward())
         if word["ThumbPosition.2.0"].item() == "Closed":
-            position.update(hand_movement.close_right_thumb())
-        for finger in word["SelectedFingers.2.0"].item():
-            position.update(hand_movement.extend_finger(finger, 'r'))
-
-            
-    driver.execute_script(move.move_character(position, 1500))
-    
+            begin.update(hand_movement.close_right_thumb())
+        for finger in "imrp":
+            begin.update(hand_movement.curve_finger(finger, 'r')) 
+        if word["Flexion.2.0"].item() == "FullyOpen":
+            for finger in word["SelectedFingers.2.0"].item():
+                begin.update(hand_movement.extend_finger(finger, 'r')) 
+        if word["MinorLocation.2.0"].item() == "Forehead":
+            begin.update(hand_movement.right_hand_location["Forehead"])
+        elif word["MinorLocation.2.0"].item() == "Mouth":
+            begin.update(hand_movement.right_hand_location["Mouth"])
+        elif word["MinorLocation.2.0"].item() == "Hand":
+            begin.update(hand_movement.right_hand_location["Mouth"])
+        else:
+            raise Exception("IMPLEMENT THIS")
+        if word["SecondMinorLocation.2.0"].item() == "HeadAway":
+            to.update({'rhx': 2, 'rhy': 0, 'rhz':2, 'rh': 3})
+    if word["RepeatedMovement.2.0"].item() == 1:
+        driver.execute_script(move.move_character([begin, to] * 3, 1000))
+    else:
+        driver.execute_script(move.move_character([begin, to], 1000))
 
 
 

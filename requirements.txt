@@ -3,3 +3,5 @@ substring
 requests
 nltk
 websockets
+selenium
+pandas

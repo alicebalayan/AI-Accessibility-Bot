@@ -1,5 +1,11 @@
 from typing import Dict
 
+right_hand_location = {
+    "Forehead": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
+    "Mouth": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
+    "Other": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
+}
+
 def close_right_thumb() -> Dict[str, float]:
     """This closes thumb"""
     return {'rt0x': -0.75, 'rt0y': 0.5, 'rt1x': 0.5, 'rt1y': 0.5, 'rt2x': 0.25}
@@ -50,3 +56,4 @@ def bring_right_hand_forward() -> Dict[str, float]:
         'rrz'  : -90,
         'rrx'  : 90,
     }
+
