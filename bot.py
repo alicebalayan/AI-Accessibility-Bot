@@ -1,5 +1,7 @@
+from re import I
 import discord
 import threading
+import asyncio
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize 
 from discord import channel
@@ -12,10 +14,19 @@ from io import BytesIO
 from requests.sessions import session
 import json
 import time
+import zipfile
+import os
+import glob
+from transcribe import transcribe_file
+
 
 import pandas as pd
 pd.options.display.max_columns = None
 pd.set_option('display.max_rows', 10)
+
+from nltk.tokenize import RegexpTokenizer
+
+TOKENIZER = RegexpTokenizer('(?u)\W+|\$[\d\.]+|\S+')
 
 p = pd.read_csv("signdata.csv",encoding='ISO-8859-1')
 
@@ -24,13 +35,23 @@ TOKEN = open("token.txt").read()
 # This list is probably incomplete, but these are the words that just don't exist at all in ASL/will more often than not be skipped
 REMOVED_WORDS = ['a','an', 'the','is','am','be','are', 'to']
 
-time_words_file = open('time_words.txt', 'r')
+time_words_file = open('files/time_words.txt', 'r')
 TIME_WORDS = time_words_file.read().split()
 
-PHRASE_ENDS = ['.',',',';',':']
+PHRASE_ENDS = ['.',',',';',':','?','!']
+
+ADJECTIVES = open('files/list-of-english-adjectives.txt', 'r').read().split()
+VERBS = open('files/list-of-english-verbs.txt', 'r').read().split()
+IRREGULAR_VERBS = open('files/Irregular_verbs.txt', 'r').read().split("\n")
+for i in range(len(IRREGULAR_VERBS)):
+	forms = IRREGULAR_VERBS[i].split()
+	IRREGULAR_VERBS[i] = forms
+
+
 
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
+servers={}
 
 pos_to_lex = {
 	"CC"  : "Minor",
@@ -71,6 +92,7 @@ pseudo_ASL = []
 
 # Takes an English string and converts it to pseudo ASL
 def process_content(text):
+	print(text)
 	tokenized = word_tokenize(text)
 	tagged = []
 	try:
@@ -78,7 +100,9 @@ def process_content(text):
 			# Not sure why, but the words need to be tokenized twice.  This is just how they did it in the tutorial I watched /shrug
 			word = nltk.word_tokenize(i)
 			tagged.append(nltk.pos_tag(word))
-		#print(tagged)
+		# regex_tokenize = TOKENIZER.tokenize(text)
+		# tagged = nltk.pos_tag(regex_tokenize)
+		print(tagged)
 
 		pseudo_ASL = pseudo_translate(tagged)
 
@@ -89,6 +113,12 @@ def process_content(text):
 		for word in pseudo_ASL:
 			test_word = word[0].lower()
 			test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+			
+			if len(test.index) == 0:
+				if test_word[-1] == "s":
+					test_word = test_word[:-1]
+					test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+			
 
 			if len(test.index) > 0:
 				match = test.loc[test["EntryID"].str.startswith(test_word + "_", 0) & (test["EntryID"].str.endswith("1") | test["EntryID"].str.endswith("2") | test["EntryID"].str.endswith("3")) | (test["EntryID"] == test_word)]
@@ -117,9 +147,8 @@ def process_content(text):
 #	1. Removes words that aren't used in ASL (articles such as "the" or "a", be verbs such as "be" and "am")
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
 # 		Note, this is a naiive approach and should probably be changed at some point.
-#	3. Uses reduplication for plurals (when it encounters a plural noun, such as "dogs", it does the sign twice) TODO
-#	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big" TODO
-#	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last" TODO
+#	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big"
+#	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last"
 #	5. Changes some word ordering, specifically for:
 #		a. Time.  In ASL, timing words come first.  So rather than "I washed my car last week" it's WEEK-LAST I WASH CAR
 #		b. Possibly other things? More research required
@@ -138,23 +167,73 @@ def pseudo_translate(tagged):
 		if tag[0][1] == 'JJS':
 			words.append(('top','JJ'))
 
-	# TODO Add reduplication of plural nouns
-
-	# TODO convert superlatives and comparatives to their roots (ie "bigger" --> "big")
-
-	# TODO check for word pairs
-
-	# Change time ordering 
+	# convert superlatives and comparatives to their roots (ie "bigger" --> "big")
+	list_words = [None] * len(words)
 	for i in range(len(words)):
 		word = words[i]
+		if word[0][:-2].lower() in ADJECTIVES and (word[0][-2:] == 'er' or word[0][-2:] == 'ly'):
+			print("ENDS WITH ER or LY")
+			list_words[i] = [word[0][:-2], "JJ"]
+		elif word[0][:-3].lower() in ADJECTIVES and word[0][-2:] == 'er':
+			print("ENDS WITH ER")
+			word[0][:-3]
+			list_words[i] = [word[0][:-3], "JJ"]
+		elif (word[0][:-3] + 'y').lower() in ADJECTIVES and word[0][-2:] == 'er':
+			print("ENDS WITH ER")
+			new_word = word[0][:-2]
+			new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		elif word[0][:-3].lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
+			list_words[i] = [word[0][:-3], "JJ"]
+		elif word[0][:-4].lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
+			list_words[i] = [word[0][:-4], "JJ"]
+		elif (word[0][:-4] + 'y').lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
+			new_word = word[0][:-3]
+			new_word = new_word[:-1] + 'y'
+			list_words[i] = [new_word, "JJ"]
+		else:
+			list_words[i] = [word[0], word[1]]
+			
+	# convert verbs to their roots (ie "jumped" --> "jump")
+	for i in range(len(list_words)):
+		word = list_words[i]
+		if word[0][:-2].lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-2], "VB"]
+		elif word[0][:-3].lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-3], "VB"]
+		elif (word[0][:-3] + 'y').lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-3] + 'y', "VB"]
+		elif word[0][:-3].lower() in VERBS and word[0][-3:] == 'ing':
+			print("ENDS WITH ing")
+			list_words[i] = [word[0][:-3], "VB"]
+		elif word[0][:-4].lower() in VERBS and word[0][-3:] == 'ing':
+			print("ENDS WITH ing")
+			list_words[i] = [word[0][:-4], "VB"]
+
+	# convert irregular verbs to infinitives
+	for i in range(len(list_words)):
+		word = list_words[i][0].lower()
+		for j in range(len(IRREGULAR_VERBS)):
+			if IRREGULAR_VERBS[j][1] == word or IRREGULAR_VERBS[j][2] == word:
+				print("IRREGULAR")
+				list_words[i] = [IRREGULAR_VERBS[j][0], "VB"]
+		
+
+	# Change time ordering 
+	for i in range(len(list_words)):
+		word = list_words[i]
 		if word[0] in TIME_WORDS:
-			move_to_start_of_sentence(words, i)
+			move_to_start_of_sentence(list_words, i)
 
 	# Convert Parts of Speech to Lexical Classes
 	return_words = []
-	for word in words:
-		word = list(word)
-		# TODO it thinks "jump" is a noun for some reason
+	for word in list_words:
 		if word[1] in pos_to_lex:
 			#print(word[1])
 			word[1] = pos_to_lex.get(word[1])
@@ -176,7 +255,7 @@ def move_to_start_of_sentence(words, pos):
 		i -= 1
 	word = words.pop(pos)
 	words.insert(0, word)
-
+ 
 
 class MyClient(discord.Client):
 	async def on_ready(self):
@@ -184,8 +263,36 @@ class MyClient(discord.Client):
 		print('Servers connected to:')
 		for server in client.guilds:
 			print(server)
+	async def join(self,message):
+		global servers
+		guild=message.guild
+		channel=message.author.voice.channel
 
+		if not guild in servers:
+			servers[guild]={}
+     		
+		servers[guild]["channel"]=channel
+
+		if not message.author.voice:
+			await message.channel.send("join vc first")
+			return
+
+		if "voice_client" in servers[guild] and servers[guild]["voice_client"].is_connected():
+			if not servers[guild]["voice_client"].channel == servers[guild]["channel"]:
+				await servers[guild]["voice_client"].move_to(servers[guild]["channel"])
+			
+		try:
+			servers[guild]["voice_client"]=await servers[guild]["channel"].connect()
+		except:
+			print("already in vc")
+			if(servers[guild]["voice_client"] ==None):
+				await message.channel.send("error")
+				servers[guild]={}
+				return	
 	async def on_message(self,message):	
+		global servers
+		guild=message.guild
+
 		if message.author == self.user:
 			return
 		# print(message.content)
@@ -214,6 +321,35 @@ class MyClient(discord.Client):
 					break
 			# print(response)
 			await message.channel.send(sendGif)
+		if message.content.startswith("!join"):
+			await self.join(message)
+		if message.content.startswith("!start"):
+			await self.join(message)
+			await message.channel.send(".record")
+			servers[guild]["recordingID"]=""
+		if message.content.startswith("!stop"):
+			await message.channel.send(".end")
+			url="http://localhost:3004/"+servers[guild]["recordingID"]+"?format=flac&container=aupzip"
+   
+			r = requests.get(url, allow_redirects=True)
+			open('recording.zip', 'wb').write(r.content)
+			with zipfile.ZipFile('recording.zip', 'r') as zip_ref:
+				zip_ref.extractall("recording")
+			os.remove("recording.zip")
+			path="recording/"+servers[guild]["recordingID"]+"_data/"
+			listOfFiles=glob.glob(path+'*.ogg')
+			print(listOfFiles)
+			for rec in listOfFiles:
+				username=rec[rec.index("-")+1:rec.index("_")-1]
+				print(username)
+				print(transcribe_file(rec))
+				
+		if "Starting record with id : " in message.content:
+			index=message.content.index("id : ")
+			print(message.content[index+len("id : "):])
+			
+			servers[guild]["recordingID"]=message.content[index+len("id : "):]
+			
 
 		
 	async def on_member_join(self,member):
