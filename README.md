@@ -30,7 +30,7 @@ nltk.download('all')
 ```
 
 You will also need to have [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) installed, and [Geckodriver](https://github.com/mozilla/geckodriver/releases) installed and added to your system PATH.
-
+You will need to have google cloud client libraries configured instructions for that can be found [here](https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries?hl=en_US) 
 ### Invite The Bot To Your Discord Server
 (link sharing disabled at the moment)
 
