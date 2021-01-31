@@ -83,11 +83,16 @@ def word_to_asl(word: DataFrame) -> None:
     else:
         positions = word["Positions"].item()
         locations = [dict()]*len(positions[0])
-
-        #TODO add approximate shapes, such as "O" for "baby_o"
+        
+        shapes = {"bent_v": "V", "bent_l":"L", "closed_b":"B", "open_b":"B", "open_h":"H",
+                "open_f":"F", "flat_h":"H", "flat_b":"B", "flat_n":"N", "flat_o":"O", "flat_m":"M",
+                "flat_v":"V", "baby_o":"O", "spread_open_b":"B", "spread_open_e":"E", "curved_v":"V",
+                "curved_l":"L", "horns":"L"}
         rhand_shape = word["Handshape.2.0"].item()
         if str(rhand_shape).upper() in hand_movement.alphabet:
             locations[0].update(hand_movement.letter_animate('r', rhand_shape.upper()))
+        elif str(rhand_shape) in shapes:
+            locations[0].update(hand_movement.letter_animate('r', shapes[rhand_shape]))
         else:
             locations[0].update(hand_movement.letter_animate('r', 'B'))
         
