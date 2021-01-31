@@ -1,5 +1,6 @@
 import discord
 import threading
+import asyncio
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize 
 from discord import channel
@@ -25,6 +26,7 @@ PHRASE_ENDS = ['.',',',';',':']
 
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
+servers={}
 
 
 # custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
@@ -103,7 +105,28 @@ class MyClient(discord.Client):
 		print('Servers connected to:')
 		for server in client.guilds:
 			print(server)
-
+	async def join(self,message):
+		if not message.author.voice:
+			await message.channel.send("join vc first")
+		else:
+			global servers
+			guild=message.guild
+			channel=message.author.voice.channel
+			if not guild in servers:
+				servers[guild]={}
+			servers[guild]["channel"]=channel
+			try:
+				servers[guild]["voice_client"]=await servers[guild]["channel"].connect()
+				fp = ('wave.wav').open('rb')
+				servers[guild]["voice_client"].listen(discord.UserFilter(discord.WaveSink('wave.wav'),message.author))
+				await asyncio.sleep(10)
+				servers[guild]["voice_client"].stop_listening()
+			except:
+				print("already in vc")
+				if(servers[guild]["voice_client"] ==None):
+					await message.channel.send("error")
+					return
+			
 	async def on_message(self,message):	
 		if message.author == self.user:
 			return
@@ -133,6 +156,9 @@ class MyClient(discord.Client):
 					break
 			# print(response)
 			await message.channel.send(sendGif)
+		if message.content.startswith("!join"):
+			await self.join(message)
+			
 
 		
 	async def on_member_join(self,member):

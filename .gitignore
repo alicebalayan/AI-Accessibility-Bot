@@ -2,3 +2,4 @@ token.txt
 data
 *.pyc
 gifKey.txt
+node_modules/
