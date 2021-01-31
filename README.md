@@ -2,14 +2,19 @@
 [![Documentation Status](https://readthedocs.org/projects/team-3/badge/?version=latest)](https://team-3.readthedocs.io/en/latest/?badge=latest)
 
 - [Team 3 - Discord ASL Translator Bot](#team-3---discord-asl-translator-bot)
+	+ [About Our Project](#about-our-project)
     + [Quick Set Up](#quick-set-up)
     + [Invite The Bot To Your Discord Server](#invite-the-bot-to-your-discord-server)
     + [ASL Discord Bot Documentation](#asl-discord-bot-documentation)
-    + [About Our Project](#about-our-project)
     + [2D Animation](#2d-animation)
     + [ASL Database](#asl-database)
     + [Gifs Support](#gifs-support)
+   
+### About Our Project 
+This project was inspired by the Accessibility Competition at CSUN to help deaf students talk with others on voice platforms such as Discord. 
 
+Our bot takes the audio from the voice channel, gets the text, and converts it to a 2D Animation in ASL. 
+Also, our bot can convert text messages in the server into ASL animation as well as send gifs by the user's request. (To find out how, visit the ASL bot documentation).
 ### Quick Set Up
 Type into your terminal:
 ```
@@ -23,13 +28,7 @@ Then the bot will wake up.
 (link sharing disabled at the moment)
 
 ### ASL Discord Bot Documentation
-(rtd link here)
-
-### About Our Project 
-This project was inspired by the Accessibility Competition at CSUN to help deaf students talk with others on voice platforms such as Discord. 
-
-Our bot takes the audio from the voice channel, gets the text, and converts it to a 2D Animation in ASL. 
-Also, our bot can convert text messages in the server into ASL animation as well as send gifs by the user's request. (To find out how, visit the ASL bot documentation). 
+(rtd link here) 
 
 ### 2D Animation
 Our ASL Discord Bot uses this [JS library](https://github.com/aslfont/sign-puppet) to display 2D animations to the user. 
