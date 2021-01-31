@@ -106,15 +106,23 @@ def word_to_asl(word: DataFrame) -> None:
         time_interval = 1000/len(locations)
 
         #TODO ARIAN PLEASE MAKE THIS WORK THE RIGHT WAY
-        for i in range(len(locations) - 1):
-            driver.execute_script(move.move_character([locations[i], locations[i+1]]*2, time_interval))
+        driver.execute_script(move.move_character(locations, 1000))
 
 def fingerspell(word):
     #TODO move hand to outstretched position
-    letters = [dict()]*len(word)
-    for i in range(len(letters)):
-        letters[i] = hand_movement.alphabet[word[i].upper()]
-    print(letters)
+    letters = [dict()]*(len(word))
+
+    if word == "?":
+        letters[0] = {'eby':2, 'ey':0.5}
+    elif word == ".":
+        letters[0] = {'eby':0, 'ey':0}
+    elif word.isalpha():
+        letters[0].update(hand_movement.bring_right_hand_forward())
+        for i in range(len(word)):
+            letters[i] = hand_movement.alphabet[word[i].upper()]
+    
+    driver.execute_script(move.move_character(letters, 500))
+    
 
         
     

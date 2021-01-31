@@ -52,11 +52,11 @@ def move_character(instructions: List[Dict[str, float]], time: int) -> str:
     s = ""
     for i, instruction in enumerate(instructions):
         s += ''.join([
-            "(() => {setTimeout(() => {", '\n',
+            "(setTimeout(() => {", '\n',
             f"animator.setTarget({instruction})", '\n',
             "},",'\n',
             f"{time * i}",'\n',
-            ")})();"
+            "));"
         ])
     return s
 
