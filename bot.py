@@ -13,6 +13,12 @@ from requests.sessions import session
 import json
 import time
 
+import pandas as pd
+pd.options.display.max_columns = None
+pd.set_option('display.max_rows', 10)
+
+p = pd.read_csv("signdata.csv",encoding='ISO-8859-1')
+
 TOKEN = open("token.txt").read()
 
 # This list is probably incomplete, but these are the words that just don't exist at all in ASL/will more often than not be skipped
@@ -59,6 +65,7 @@ pos_to_lex = {
 	"WRB" : "Minor"
 }
 
+pseudo_ASL = []
 
 # custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
 
@@ -76,6 +83,32 @@ def process_content(text):
 		pseudo_ASL = pseudo_translate(tagged)
 
 		print(pseudo_ASL)
+
+		true_ASL = []
+
+		for word in pseudo_ASL:
+			test_word = word[0].lower()
+			test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+
+			if len(test.index) > 0:
+				match = test.loc[test["EntryID"].str.startswith(test_word + "_", 0) & (test["EntryID"].str.endswith("1") | test["EntryID"].str.endswith("2") | test["EntryID"].str.endswith("3")) | (test["EntryID"] == test_word)]
+				perfect_match = match.loc[match["LexicalClass"] == word[1]]
+				if len(perfect_match.index) > 0:
+					true_ASL.append(perfect_match["EntryID"].iloc[0])
+					print("perfect")
+				elif len(match.index) > 0:
+					true_ASL.append(match["EntryID"].iloc[0])
+					print("close")
+				else:
+					true_ASL.append(test["EntryID"].iloc[0])
+					print("fallback")
+			else:
+				print('Not in ASL dictionary')
+		
+		print(true_ASL)
+				
+
+			#test[["EntryID", "LexicalClass"]]
 			
 	except Exception as e:
 		print(str(e))
@@ -121,8 +154,9 @@ def pseudo_translate(tagged):
 	return_words = []
 	for word in words:
 		word = list(word)
+		# TODO it thinks "jump" is a noun for some reason
 		if word[1] in pos_to_lex:
-			print(word[1])
+			#print(word[1])
 			word[1] = pos_to_lex.get(word[1])
 		else:
 			word[1] = "Symbol"
@@ -189,4 +223,5 @@ class MyClient(discord.Client):
 
 client = MyClient()
 
-client.run(TOKEN)
+if __name__ == "__main__":
+	client.run(TOKEN)
