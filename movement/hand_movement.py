@@ -1,9 +1,15 @@
 from typing import Dict
 
 right_hand_location = {
-    "Forehead": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
-    "Mouth": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
-    "Other": {'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3},
+    "Forehead": [0,-2,0,3],
+    "Mouth": [0,0,0,3],
+    "Chin": [-.5,.8,-2,2],
+    "Clavicle": [.5,0,-3,1],
+    "HeadAway": [2,-1,2,3],
+    "Eye": [-.8,-3,-1,1],
+    "Neutral":[1,-2,0,1],
+    "Other": [0,0,0,3]
+    
 }
 
 def close_right_thumb() -> Dict[str, float]:

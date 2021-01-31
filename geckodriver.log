@@ -1,0 +1,349 @@
+1612054248541	geckodriver	INFO	Listening on 127.0.0.1:65169
+1612054329130	geckodriver	INFO	Listening on 127.0.0.1:65292
+1612054332225	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofilelUq9t0"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612054335432	Marionette	INFO	Listening on port 65300
+1612054335936	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612054335951	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1612055478505	Marionette	INFO	Stopped listening on port 65300
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileuSp2K3"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612055473562	Marionette	INFO	Listening on port 49251
+1612055474091	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612055474114	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612055775325	Marionette	INFO	Stopped listening on port 49251
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileyFxVjq"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612055767515	Marionette	INFO	Listening on port 49326
+1612055767936	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612055767954	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056107114	Marionette	INFO	Stopped listening on port 49326
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056111149	geckodriver	INFO	Listening on 127.0.0.1:49422
+1612056114231	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileBKI5LH"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056118098	Marionette	INFO	Listening on port 49430
+1612056118461	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056118481	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056193066	Marionette	INFO	Stopped listening on port 49430
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056197474	geckodriver	INFO	Listening on 127.0.0.1:49487
+1612056200536	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileym9Tph"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056204246	Marionette	INFO	Listening on port 49495
+1612056204775	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056204796	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056251812	Marionette	INFO	Stopped listening on port 49491612056253170	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofiletD8CPp"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056257150	Marionette	INFO	Listening on port 49558
+1612056257380	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056257399	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056281033	Marionette	INFO	Stopped listening on port 49558
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+"--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileWynMsP"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056283412	Marionette	INFO	Listening on port 49621
+1612056283956	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056283972	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056301656	Marionette	INFO	Stopped listening on port 49621612056302964	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileiYPgae"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056306541	Marionette	INFO	Listening on port 49694
+1612056306648	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056306670	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1612056515508	Marionette	INFO	Stopped listening on port 49694
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056518285	geckodriver	INFO	Listening on 127.0.0.1:49765
+1612056521326	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileHWhzii"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056524407	Marionette	INFO	Listening on port 49773
+1612056524530	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056524545	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056662784	Marionette	INFO	Stopped listening on port 49773
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056665174	geckodriver	INFO	Listening on 127.0.0.1:49837
+1612056668268	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileEsSvkB"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056671530	Marionette	INFO	Listening on port 49846
+1612056671943	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056671962	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612056695177	Marionette	INFO	Stopped listening on port 49846
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056697783	geckodriver	INFO	Listening on 127.0.0.1:49904
+1612056700845	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileIcpEyc"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056703944	Marionette	INFO	Listening on port 49913
+1612056704022	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056704047	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1612056974844	Marionette	INFO	Stopped listening on port 49913
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612056977837	geckodriver	INFO	Listening on 127.0.0.1:49987
+1612056980925	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileezu7Y6"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612056984183	Marionette	INFO	Listening on port 49995
+1612056984627	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612056984644	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057299646	Marionette	INFO	Stopped listening on port 49995
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612057301169	geckodriver	INFO	Listening on 127.0.0.1:50081
+1612057304261	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileaRkjhc"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057307047	Marionette	INFO	Listening on port 50089
+1612057307418	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057307438	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057511912	Marionette	INFO	Stopped listening on port 50081612057513547	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileApmJ7P"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057516998	Marionette	INFO	Listening on port 50175
+1612057517243	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057517263	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057621043	Marionette	INFO	Stopped listening on port 50171612057622203	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofile97j1r9"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057624613	Marionette	INFO	Listening on port 50250
+1612057624877	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057624893	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057809533	Marionette	INFO	Stopped listening on port 50251612057811140	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileDDaNFa"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057814768	Marionette	INFO	Listening on port 50340
+1612057814851	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057814865	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057838620	Marionette	INFO	Stopped listening on port 50340
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612057840302	geckodriver	INFO	Listening on 127.0.0.1:50398
+1612057843408	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileZEpMCp"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057846490	Marionette	INFO	Listening on port 50407
+1612057846623	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057846651	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057930479	Marionette	INFO	Stopped listening on port 50401612057931729	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileo19mTT"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057934311	Marionette	INFO	Listening on port 50483
+1612057934395	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057934409	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057957582	Marionette	INFO	Stopped listening on port 50483
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612057959342	geckodriver	INFO	Listening on 127.0.0.1:50539
+1612057962412	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileP6m4oy"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057964936	Marionette	INFO	Listening on port 50547
+1612057965069	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057965082	Marionette	ERROR	[18] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612057987285	Marionette	INFO	Stopped listening on port 50547
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612057989727	geckodriver	INFO	Listening on 127.0.0.1:50604
+1612057992817	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofile9VJuph"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612057995395	Marionette	INFO	Listening on port 50613
+1612057995500	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612057995517	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612058007526	Marionette	INFO	Stopped listening on port 50611612058009032	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofilegcFjbk"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612058011391	Marionette	INFO	Listening on port 50675
+1612058011693	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612058011705	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1612058118245	Marionette	INFO	Stopped listening on port 50675
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1612058142171	geckodriver	INFO	Listening on 127.0.0.1:50744
+1612058145266	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofile6BgkGQ"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612058147997	Marionette	INFO	Listening on port 50752
+1612058148436	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612058148448	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+console.error: services.settings: 
+  Message: TypeError: Ne1612058539724	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileH844e5"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612058542617	Marionette	INFO	Listening on port 50916
+1612058542917	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612058542930	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 125: Error: Invalid autocomplete selectedIndex
+1612059350562	Marionette	INFO	Stopped listening on port 50916
+1612059352515	geckodriver	INFO	Listening on 127.0.0.1:51062
+1612059355614	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileTCyGKI"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612059358646	Marionette	INFO	Listening on port 51071
+1612059358812	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612059358828	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+1612059445093	Marionette	INFO	Stopped listening on port 51071612059446713	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Color\\AppData\\Local\\Temp\\rust_mozprofileJ4AgVs"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1612059449756	Marionette	INFO	Listening on port 51145
+1612059449895	Marionette	WARN	TLS certificate errors will be ignored for this session
+1612059449913	Marionette	ERROR	[15] No reply from Marionette:Register
+JavaScript warning: http://aslfont.github.io/sign-puppet/demo/jquery.min.js, line 2: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
+JavaScript error: http://aslfont.github.io/sign-puppet/demo/#forward, line 3: ReferenceError: False is not defined
