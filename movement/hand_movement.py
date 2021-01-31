@@ -17,11 +17,7 @@ right_hand_location = {
     "TorsoMid": [0,3,-3,1],
     "Waist": [1,5,-3,1],
     "ForearmUlnar": [-3,2,-2,1],
-    "Hips": [2,6,-3,1],
-
-
-
-    
+    "Hips": [2,6,-3,1]
 }
 
 def close_right_thumb() -> Dict[str, float]:
