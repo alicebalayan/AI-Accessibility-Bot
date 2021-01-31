@@ -17,13 +17,16 @@ Our bot takes the audio from the voice channel, gets the text, and converts it t
 Also, our bot can convert text messages that transfers json from discord to websocket into 2D ASL animation as well as send gifs (giphy API) by the user's request. (To find out how, visit the ASL bot documentation).
 
 ### Quick Set Up
+Install requirements with ```python3 -m pip install -r requirements.txt```
+
 Type into your terminal:
 ```
 python3
 import nltk
 nltk.download('all')
 ```
-Then the bot will wake up.
+
+You will also need to have [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) installed, and [Geckodriver](https://github.com/mozilla/geckodriver/releases) installed and added to your system PATH.
 
 ### Invite The Bot To Your Discord Server
 (link sharing disabled at the moment)

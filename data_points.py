@@ -36,7 +36,7 @@ def read_points(file_name: str):
     return points
 
 def append_points_to_data(points, data):
-    # data = pd.read_csv(data_file, encoding='ISO-8859-1')
+    data = pd.read_csv(data_file, encoding='ISO-8859-1')
     data["Positions"] = None
     for i, p in enumerate(points):
         data["Positions"][100 + i] = p

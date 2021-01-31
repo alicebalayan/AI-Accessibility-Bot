@@ -74,10 +74,7 @@ def bring_right_hand_forward() -> Dict[str, float]:
 def convert_x_y_to_rh(x: float, y: float) -> Tuple[float, float]:
     return (-(x - 187) / 26.6, (y - 133) / 26.66)
 
-# Move hand forward first 
-def letter_animate(hand, letter) -> Dict[str, float]:
-
-    alphabet = {
+alphabet = {
         "A": {
             "ri0":  1, "ri1":  0.9, "ri2":  0.75, "ris":  0.1,     #index
             "rm0":  1, "rm1":  0.9, "rm2":  0.75, "rms":  0.1,     #middle
@@ -313,6 +310,8 @@ def letter_animate(hand, letter) -> Dict[str, float]:
         }
     }
 
+# Move hand forward first 
+def letter_animate(hand, letter) -> Dict[str, float]:
     if hand == "l":
         left = {}
         for r in alphabet[letter]:

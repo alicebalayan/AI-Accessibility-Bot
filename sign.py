@@ -3,7 +3,7 @@ from pandas.core.frame import DataFrame
 from selenium.webdriver.firefox.webdriver import WebDriver
 from movement import move, hand_movement
 from selenium import webdriver
-from data_points import *
+# from data_points import *
 
 import pandas as pd
 
@@ -27,20 +27,30 @@ def main():
     );
     """)
 
-    points = read_points("points.txt")
-    p = append_points_to_data(p, points)
+    points = read_points("files/points.txt")
+    print(points)
+    p["Positions"] = None
+    for i, k in enumerate(points):
+        p["Positions"][100 + i] = k
+    
+    print(p["Positions"].iloc[100:200])
     
     # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
     while True:
         driver.execute_script(move.move_character([move.set_default_pose()], 1000))
-        word = p.loc[p["EntryID"] == input()] 
-        word_to_asl(word)
+        to_parse = input()
+        word = p.loc[p["EntryID"] == to_parse] 
+        if len(word.index) > 0:
+            word_to_asl(word)
+        else:
+            fingerspell(to_parse)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
     driver.close()
 
 def word_to_asl(word: DataFrame) -> None:
-    begin, to = dict(), dict()
-    if word["SignType.2.0"].item() == "OneHanded":
+    #TODO add LH positions
+    if word["Positions"].item() == None:
+        begin, to = dict(), dict()
         begin.update(hand_movement.bring_right_hand_forward())
         if word["ThumbPosition.2.0"].item() == "Closed":
             begin.update(hand_movement.close_right_thumb())
@@ -63,13 +73,94 @@ def word_to_asl(word: DataFrame) -> None:
                 #raise Exception(f"IMPLEMENT {word['SecondMinorLocation.2.0'].item()}")
                 to.update({'rhx': -1, 'rhy': 2, 'rhz': 0, 'rh': 1})
                 print("Unknown position")
-        
-    if word["RepeatedMovement.2.0"].item() == 1:
-        driver.execute_script(move.move_character([begin, to] * 3, 1000))
+        if word["RepeatedMovement.2.0"].item() == 1:
+            driver.execute_script(move.move_character([begin, to] * 3, 1000))
+        else:
+            driver.execute_script(move.move_character([begin, to], 1000))
     else:
-        driver.execute_script(move.move_character([begin, to], 1000))
+        positions = word["Positions"].item()
+        locations = [dict()]*len(positions[0])
+
+        #TODO add approximate shapes, such as "O" for "baby_o"
+        rhand_shape = word["Handshape.2.0"].item()
+        if str(rhand_shape).upper() in hand_movement.alphabet:
+            locations[0].update(hand_movement.letter_animate('r', rhand_shape.upper()))
+        else:
+            locations[0].update(hand_movement.letter_animate('r', 'B'))
+        
+        lhand_shape = word["NonDominantHandshape.2.0"].item()
+        if str(lhand_shape).upper() in hand_movement.alphabet:
+            locations[0].update(hand_movement.letter_animate('r', lhand_shape.upper()))
+        else:
+            locations[0].update(hand_movement.letter_animate('l', 'B'))
+
+        print(positions)
+        
+        for i in range(len(positions[0])):
+            rhposition = positions[0][i]
+            locations[i].update({'rhx':(-1*(rhposition[0] - 187)/26.66), 'rhy':((rhposition[1]-133)/26.66), 'rhz': 0, 'rh': 1})
+            if len(positions) > 1 and i < len(positions[1]):
+                lhposition = positions[1][i]
+                locations[i].update({'lhx':(1*(lhposition[0] - 187)/26.66), 'lhy':((lhposition[1]-133)/26.66), 'lhz': 0, 'lh': 1})
+        
+        time_interval = 1000/len(locations)
+
+        #TODO ARIAN PLEASE MAKE THIS WORK THE RIGHT WAY
+        for i in range(len(locations) - 1):
+            driver.execute_script(move.move_character([locations[i], locations[i+1]]*2, time_interval))
+
+def fingerspell(word):
+    #TODO move hand to outstretched position
+    letters = [dict()]*len(word)
+    for i in range(len(letters)):
+        letters[i] = hand_movement.alphabet[word[i].upper()]
+    print(letters)
+
+        
+    
 
 
+# ======================================================================================
+
+threshold = 40
+
+# Read points
+def read_points(file_name: str):
+    points = [[]]
+    try:
+        with open(file_name, 'r') as f:
+            for line in f:
+                (x, y) = line.split(',')
+                x, y = int(x), int(y)
+                if x < threshold and y < threshold:
+                    points.append([])
+                else:
+                    points[-1].append((x, y))
+    except FileNotFoundError as e:
+        print("Put the file here")
+
+    # Separate hands
+    for i, clicks in enumerate(points):
+        left, right = [], []
+        finished_left = False
+        for j, (x, y) in enumerate(clicks):
+            if x > (400 - threshold) and y > (300 - threshold):
+                finished_left = True
+            else:
+                if finished_left:
+                    right.append((x,y))
+                else:
+                    left.append((x,y))
+        if finished_left:
+            points[i] = (left, right)
+        else:
+            points[i] = (left, )
+    return points
+
+# [] - list of tuples
+#   - () - tuple of RH, LH
+#       - [] list of coords
+#            - () coords
 
 if __name__ == "__main__":
     main()

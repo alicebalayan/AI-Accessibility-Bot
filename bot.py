@@ -152,6 +152,7 @@ def process_content(text):
 #	5. Changes some word ordering, specifically for:
 #		a. Time.  In ASL, timing words come first.  So rather than "I washed my car last week" it's WEEK-LAST I WASH CAR
 #		b. Possibly other things? More research required
+#	6. TODO turn question mark into facial indicator
 
 def pseudo_translate(tagged):
 
