@@ -46,10 +46,19 @@ def word_to_asl(word: DataFrame) -> None:
             for finger in word["SelectedFingers.2.0"].item():
                 begin.update(hand_movement.extend_finger(finger, 'r')) 
         if word["MinorLocation.2.0"].item() == "Forehead":
-            begin.update({'rhx': 0, 'rhy': 0, 'rhz':0, 'rh': 3})
+            begin.update(hand_movement.right_hand_location["Forehead"])
+        elif word["MinorLocation.2.0"].item() == "Mouth":
+            begin.update(hand_movement.right_hand_location["Mouth"])
+        elif word["MinorLocation.2.0"].item() == "Hand":
+            begin.update(hand_movement.right_hand_location["Mouth"])
+        else:
+            raise Exception("IMPLEMENT THIS")
         if word["SecondMinorLocation.2.0"].item() == "HeadAway":
             to.update({'rhx': 2, 'rhy': 0, 'rhz':2, 'rh': 3})
-    driver.execute_script(move.move_character([begin, to], 1000))
+    if word["RepeatedMovement.2.0"].item() == 1:
+        driver.execute_script(move.move_character([begin, to] * 3, 1000))
+    else:
+        driver.execute_script(move.move_character([begin, to], 1000))
 
 
 
