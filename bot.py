@@ -345,7 +345,9 @@ class MyClient(discord.Client):
 		if message.author == self.user:
 			return
 		# print(message.content)
-		process_content(str(message.content))
+		if not (message.author.bot):
+			if not message.content.startswith("!"):
+				process_content(str(message.content))
 		# global data
 		# print(data)
 		data={
