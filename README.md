@@ -35,7 +35,12 @@ You will also need to have [Mozilla Firefox](https://www.mozilla.org/en-US/firef
 (link sharing disabled at the moment)
 
 ### ASL Discord Bot Documentation
-(rtd link here) 
+1. Invite the bot into the server
+2. Set up Docker to host audio recorder that join voice channels
+3. Tell the bot to start/stop recording
+(it should display the text on the screen from different users) 
+4. Try running !asl commands to get asl gifs
+5. ASL 2D animation - beta mode
 
 ### Natural Language Processing
 Our ASL Bot processes the words in the following way: removes words that aren't used, adds superlatives, converts superlatives to their roots, checks for word pairs (good morning), looks for words that mean time. 
