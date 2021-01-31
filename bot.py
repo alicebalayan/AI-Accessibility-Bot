@@ -1,6 +1,7 @@
 from re import I
 import discord
 import threading
+import asyncio
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize 
 from discord import channel
@@ -13,6 +14,11 @@ from io import BytesIO
 from requests.sessions import session
 import json
 import time
+import zipfile
+import os
+import glob
+from transcribe import transcribe_file
+
 
 import pandas as pd
 pd.options.display.max_columns = None
@@ -45,6 +51,7 @@ for i in range(len(IRREGULAR_VERBS)):
 
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
+servers={}
 
 pos_to_lex = {
 	"CC"  : "Minor",
@@ -248,7 +255,7 @@ def move_to_start_of_sentence(words, pos):
 		i -= 1
 	word = words.pop(pos)
 	words.insert(0, word)
-
+ 
 
 class MyClient(discord.Client):
 	async def on_ready(self):
@@ -256,8 +263,36 @@ class MyClient(discord.Client):
 		print('Servers connected to:')
 		for server in client.guilds:
 			print(server)
+	async def join(self,message):
+		global servers
+		guild=message.guild
+		channel=message.author.voice.channel
 
+		if not guild in servers:
+			servers[guild]={}
+     		
+		servers[guild]["channel"]=channel
+
+		if not message.author.voice:
+			await message.channel.send("join vc first")
+			return
+
+		if "voice_client" in servers[guild] and servers[guild]["voice_client"].is_connected():
+			if not servers[guild]["voice_client"].channel == servers[guild]["channel"]:
+				await servers[guild]["voice_client"].move_to(servers[guild]["channel"])
+			
+		try:
+			servers[guild]["voice_client"]=await servers[guild]["channel"].connect()
+		except:
+			print("already in vc")
+			if(servers[guild]["voice_client"] ==None):
+				await message.channel.send("error")
+				servers[guild]={}
+				return	
 	async def on_message(self,message):	
+		global servers
+		guild=message.guild
+
 		if message.author == self.user:
 			return
 		# print(message.content)
@@ -286,6 +321,35 @@ class MyClient(discord.Client):
 					break
 			# print(response)
 			await message.channel.send(sendGif)
+		if message.content.startswith("!join"):
+			await self.join(message)
+		if message.content.startswith("!start"):
+			await self.join(message)
+			await message.channel.send(".record")
+			servers[guild]["recordingID"]=""
+		if message.content.startswith("!stop"):
+			await message.channel.send(".end")
+			url="http://localhost:3004/"+servers[guild]["recordingID"]+"?format=flac&container=aupzip"
+   
+			r = requests.get(url, allow_redirects=True)
+			open('recording.zip', 'wb').write(r.content)
+			with zipfile.ZipFile('recording.zip', 'r') as zip_ref:
+				zip_ref.extractall("recording")
+			os.remove("recording.zip")
+			path="recording/"+servers[guild]["recordingID"]+"_data/"
+			listOfFiles=glob.glob(path+'*.ogg')
+			print(listOfFiles)
+			for rec in listOfFiles:
+				username=rec[rec.index("-")+1:rec.index("_")-1]
+				print(username)
+				print(transcribe_file(rec))
+				
+		if "Starting record with id : " in message.content:
+			index=message.content.index("id : ")
+			print(message.content[index+len("id : "):])
+			
+			servers[guild]["recordingID"]=message.content[index+len("id : "):]
+			
 
 		
 	async def on_member_join(self,member):
