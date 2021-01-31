@@ -8,8 +8,16 @@ right_hand_location = {
     "HeadAway": [2,-1,2,3],
     "Eye": [-.8,-3,-1,1],
     "Neutral":[1,-2,0,1],
-    "Other": [0,0,0,3]
-    
+    "Other": [0,0,0,3],
+    "UnderChin": [-.5,.8,-2,2],
+    "CheekNose": [0,-1,-3,1],
+    "TorsoTop": [0,1,-3,1],
+    "HandAway": [-4,-1,1,1],
+    "FingerDown": [-2,2,0,1],
+    "TorsoMid": [0,3,-3,1],
+    "Waist": [1,5,-3,1],
+    "ForearmUlnar": [-3,2,-2,1],
+    "Hips": [2,6,-3,1]
 }
 
 def close_right_thumb() -> Dict[str, float]:
