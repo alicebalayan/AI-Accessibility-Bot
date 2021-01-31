@@ -1,5 +1,6 @@
-threshold = 40
+import pandas as pd
 
+threshold = 40
 points = [[]]
 
 # Read points
@@ -31,3 +32,10 @@ for i, clicks in enumerate(points):
         points[i] = (left, right)
     else:
         points[i] = (left, )
+
+data = pd.read_csv("signdata.csv", encoding='ISO-8859-1')
+data["Positions"] = None
+
+for i, p in enumerate(points):
+    data["Positions"][100 + i] = p
+
