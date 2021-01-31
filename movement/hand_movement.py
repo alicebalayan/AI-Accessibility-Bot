@@ -20,3 +20,52 @@ def bring_forward() -> Dict[str, float]:
         'ez'  : 1
     }
 
+
+# Move hand forward first
+alphabet = {
+
+    "A": {
+        "ri0":  1, "ri1":  0.9, "ri2":  0.75, "ris":  0.1,     #index
+        "rm0":  1, "rm1":  0.9, "rm2":  0.75, "rms":  0.1,     #middle
+        "rr0":  1, "rr1":  0.9, "rr2":  0.75, "rrs":  0.1,     #ring
+        "rp0":  1, "rp1":  0.9, "rp2":  0.75, "rps":  0.1,     #pinky
+        "rt0x": 3, "rt0y": 0, "rt1x": 0, "rt1y": 0, "rt2x": 0, #thumb
+    },
+
+
+    "B": {
+        "ri0":  0, "ri1":  0, "ri2":  0, "ris":  0,                         #index
+        "rm0":  0, "rm1":  0, "rm2":  0, "rms":  0,                         #middle
+        "rr0":  0, "rr1":  0, "rr2":  0, "rrs":  0,                         #ring
+        "rp0":  0, "rp1":  0, "rp2":  0, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.5, "rt1x": 0.5, "rt1y": 0.5, "rt2x": 0.25, #thumb
+    },
+
+    "C": {
+        "ri0":  0, "ri1":  0.8, "ri2":  0, "ris":  0,            #index
+        "rm0":  0, "rm1":  0.8, "rm2":  0, "rms":  0,            #middle
+        "rr0":  0, "rr1":  0.8, "rr2":  0, "rrs":  0,            #ring
+        "rp0":  0, "rp1":  0.8, "rp2":  0, "rps":  0,            #pinky
+        "rt0x": -2, "rt0y": 1, "rt1x": 0, "rt1y": -3, "rt2x": 0, #thumb
+        "rrz": -130                                              #rotate
+    },
+
+    "D": {
+        "ri0":  0, "ri1":  0.8, "ri2":  0, "ris":  0,                        #index
+        "rm0":  1, "rm1":  0.8, "rm2":  0, "rms":  0,                        #middle
+        "rr0":  1, "rr1":  0.8, "rr2":  0, "rrs":  0,                        #ring
+        "rp0":  1, "rp1":  0.8, "rp2":  0, "rps":  0,                        #pinky
+        "rt0x": -0.75, "rt0y": 0.5, "rt1x": 0.75, "rt1y": 0.5, "rt2x": 0.25, #thumb
+        "rrz": -110
+    },
+
+    "E": {
+        "ri0":  0, "ri1":  1, "ri2":  1, "ris":  0,                         #index
+        "rm0":  0, "rm1":  1, "rm2":  1, "rms":  0,                         #middle
+        "rr0":  0, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  0, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.5, "rt1x": 0.5, "rt1y": 0.2, "rt2x": 0.5, #thumb
+        "rrz": -100
+    },
+
+}
