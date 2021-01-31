@@ -141,7 +141,7 @@ def process_content(text):
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
 # 		Note, this is a naiive approach and should probably be changed at some point.
 #	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big"
-#	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last" TODO
+#	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last"
 #	5. Changes some word ordering, specifically for:
 #		a. Time.  In ASL, timing words come first.  So rather than "I washed my car last week" it's WEEK-LAST I WASH CAR
 #		b. Possibly other things? More research required
@@ -218,9 +218,6 @@ def pseudo_translate(tagged):
 				list_words[i] = [IRREGULAR_VERBS[j][0], "VB"]
 		
 
-
-	# TODO check for word pairs
-
 	# Change time ordering 
 	for i in range(len(list_words)):
 		word = list_words[i]
@@ -230,7 +227,6 @@ def pseudo_translate(tagged):
 	# Convert Parts of Speech to Lexical Classes
 	return_words = []
 	for word in list_words:
-		# TODO it thinks "jump" is a noun for some reason
 		if word[1] in pos_to_lex:
 			#print(word[1])
 			word[1] = pos_to_lex.get(word[1])
