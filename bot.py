@@ -138,6 +138,7 @@ def process_content(text):
 					#	print("fallback")
 				else:
 				#	print('Not in ASL dictionary')
+					true_ASL.append(test_word)
 					pass
 		print(true_ASL)
 		make_moves(true_ASL)

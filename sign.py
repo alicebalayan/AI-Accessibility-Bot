@@ -3,11 +3,14 @@ from pandas.core.frame import DataFrame
 from selenium.webdriver.firefox.webdriver import WebDriver
 from movement import move, hand_movement
 from selenium import webdriver
+import time
 # from data_points import *
 
 import pandas as pd
 
 driver = webdriver.Firefox()
+
+threshold = 40
 
 
 def startup(): 
@@ -28,23 +31,69 @@ def startup():
     
     #driver.close() TODO add this at some point
 
+def read_points(file_name: str):
+    points = [[]]
+    try:
+        with open(file_name, 'r') as f:
+            for line in f:
+                (x, y) = line.split(',')
+                x, y = int(x), int(y)
+                if x < threshold and y < threshold:
+                    points.append([])
+                else:
+                    points[-1].append((x, y))
+    except FileNotFoundError as e:
+        print("Put the file here")
+
+    # Separate hands
+    for i, clicks in enumerate(points):
+        left, right = [], []
+        finished_left = False
+        for j, (x, y) in enumerate(clicks):
+            if x > (400 - threshold) and y > (300 - threshold):
+                finished_left = True
+            else:
+                if finished_left:
+                    right.append((x,y))
+                else:
+                    left.append((x,y))
+        if finished_left:
+            points[i] = (left, right)
+        else:
+            points[i] = (left, )
+    return points
+
+# [] - list of tuples
+#   - () - tuple of RH, LH
+#       - [] list of coords
+#            - () coords
+
+p = pd.read_csv("signdata.csv", encoding='ISO-8859-1')
+
+points = read_points("files/points.txt")
+p["Positions"] = None
+for i, k in enumerate(points):
+    p["Positions"][100 + i] = k
+
 def make_moves(words):
     # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
-    p = pd.read_csv("signdata.csv", encoding='ISO-8859-1')
-
-    points = read_points("files/points.txt")
-    p["Positions"] = None
-    for i, k in enumerate(points):
-        p["Positions"][100 + i] = k
+    
 
     for to_parse in words:
         driver.execute_script(move.move_character([move.set_default_pose()], 1000))
         # to_parse = input()
-        word = p.loc[p["EntryID"] == to_parse] 
-        if len(word.index) > 0:
+        
+        # if len(word.index) > 0:
+        #     word_to_asl(word)
+
+        legal_words = p['EntryID'].tolist()
+
+        if to_parse in legal_words:
+            word = p.loc[p["EntryID"] == to_parse] 
             word_to_asl(word)
         else:
             fingerspell(to_parse)
+        time.sleep(2)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
 
 
@@ -111,6 +160,7 @@ def word_to_asl(word: DataFrame) -> None:
 
 def fingerspell(word):
     #TODO move hand to outstretched position
+    print(word + " here")
     letters = [dict()]*(len(word))
 
     if word == "?":
@@ -118,7 +168,7 @@ def fingerspell(word):
     elif word == ".":
         letters[0] = {'eby':0, 'ey':0}
     elif word.isalpha():
-        letters[0].update(hand_movement.bring_right_hand_forward())
+        letters[0].update({'rh':1, 'rhx':0, 'rhy':2 })
         for i in range(len(word)):
             letters[i] = hand_movement.alphabet[word[i].upper()]
     
@@ -131,45 +181,9 @@ def fingerspell(word):
 
 # ======================================================================================
 
-threshold = 40
 
 # Read points
-def read_points(file_name: str):
-    points = [[]]
-    try:
-        with open(file_name, 'r') as f:
-            for line in f:
-                (x, y) = line.split(',')
-                x, y = int(x), int(y)
-                if x < threshold and y < threshold:
-                    points.append([])
-                else:
-                    points[-1].append((x, y))
-    except FileNotFoundError as e:
-        print("Put the file here")
 
-    # Separate hands
-    for i, clicks in enumerate(points):
-        left, right = [], []
-        finished_left = False
-        for j, (x, y) in enumerate(clicks):
-            if x > (400 - threshold) and y > (300 - threshold):
-                finished_left = True
-            else:
-                if finished_left:
-                    right.append((x,y))
-                else:
-                    left.append((x,y))
-        if finished_left:
-            points[i] = (left, right)
-        else:
-            points[i] = (left, )
-    return points
-
-# [] - list of tuples
-#   - () - tuple of RH, LH
-#       - [] list of coords
-#            - () coords
 
 if __name__ == "__main__":
     startup()
