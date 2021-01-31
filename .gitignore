@@ -2,4 +2,4 @@ token.txt
 data
 *.pyc
 gifKey.txt
-geckodriver.log
+*.log

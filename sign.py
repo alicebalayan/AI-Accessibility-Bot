@@ -50,13 +50,16 @@ def word_to_asl(word: DataFrame) -> None:
             values = hand_movement.right_hand_location[word["MinorLocation.2.0"].item()]
             begin.update({'rhx': values[0], 'rhy': values[1], 'rhz': values[2], 'rh': values[3]})
         else:
-            raise Exception(f"IMPLEMENT {word['MinorLocation.2.0'].item()}")
+            #raise Exception(f"IMPLEMENT {word['MinorLocation.2.0'].item()}")
+            print("Unknown position")
         if not pd.isnull(word["SecondMinorLocation.2.0"].item()):
             if word["SecondMinorLocation.2.0"].item() in hand_movement.right_hand_location:
                 values = hand_movement.right_hand_location[word["SecondMinorLocation.2.0"].item()]
                 to.update({'rhx': values[0], 'rhy': values[1], 'rhz': values[2], 'rh': values[3]})
             else:
-                raise Exception(f"IMPLEMENT {word['SecondMinorLocation.2.0'].item()}")
+                #raise Exception(f"IMPLEMENT {word['SecondMinorLocation.2.0'].item()}")
+                to.update({'rhx': -1, 'rhy': 2, 'rhz': 0, 'rh': 1})
+                print("Unknown position")
         
     if word["RepeatedMovement.2.0"].item() == 1:
         driver.execute_script(move.move_character([begin, to] * 3, 1000))
