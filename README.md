@@ -9,6 +9,7 @@
     + [2D Animation](#2d-animation)
     + [ASL Database](#asl-database)
     + [Gifs Support](#gifs-support)
+    + [Security](#security)
    
 ### About Our Project 
 This project was inspired by the Accessibility Competition at CSUN to help deaf students talk with others on voice platforms such as Discord. 
@@ -43,3 +44,5 @@ Our ASL Discord Bot relies on this [database](https://asl-lex.org/) to get relev
 Our  ASL Discord Bot support a subset of ASL gifs that contain most common phrases and slang to keep ASL fun. Because who doesn't want fun? To learn how to run the commands, refer to the documentation about the bot. 
 We are using [giphy](https://giphy.com/signwithrobert/) and narrowing down the search to the "Sign with Robert" content as it is the most relevant and accurate. 
 [Home Run By Sign with Robert](http://gph.is/2j6qHob)
+### Security
+All of the auth keys are stored privately and not shared with anyone else outside of the development team. In addition, no user's information is been stored (audio recording).
