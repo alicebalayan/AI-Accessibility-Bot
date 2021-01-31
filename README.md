@@ -14,7 +14,8 @@
 This project was inspired by the Accessibility Competition at CSUN to help deaf students talk with others on voice platforms such as Discord. 
 
 Our bot takes the audio from the voice channel, gets the text, and converts it to a 2D Animation in ASL. 
-Also, our bot can convert text messages in the server into ASL animation as well as send gifs by the user's request. (To find out how, visit the ASL bot documentation).
+Also, our bot can convert text messages that transfers json from discord to websocket into 2D ASL animation as well as send gifs (giphy API) by the user's request. (To find out how, visit the ASL bot documentation).
+
 ### Quick Set Up
 Type into your terminal:
 ```
