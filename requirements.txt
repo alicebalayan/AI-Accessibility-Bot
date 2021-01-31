@@ -6,3 +6,5 @@ websockets
 pydub
 google.cloud
 google.cloud.speech
+selenium
+pandas
