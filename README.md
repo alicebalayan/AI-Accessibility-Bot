@@ -11,6 +11,7 @@
     + [ASL Database](#asl-database)
     + [Gifs Support](#gifs-support)
     + [Security](#security)
+    + [Code Snippets](#code-snippets)
    
 ### About Our Project 
 This project was inspired by the Accessibility Competition at CSUN to help deaf students talk with others on voice platforms such as Discord. 
