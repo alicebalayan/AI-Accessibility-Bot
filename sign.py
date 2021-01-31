@@ -46,16 +46,18 @@ def word_to_asl(word: DataFrame) -> None:
         if word["Flexion.2.0"].item() == "FullyOpen":
             for finger in word["SelectedFingers.2.0"].item():
                 begin.update(hand_movement.extend_finger(finger, 'r')) 
-        if word["MinorLocation.2.0"].item() == "Forehead":
-            begin.update(hand_movement.right_hand_location["Forehead"])
-        elif word["MinorLocation.2.0"].item() == "Mouth":
-            begin.update(hand_movement.right_hand_location["Mouth"])
-        elif word["MinorLocation.2.0"].item() == "Hand":
-            begin.update(hand_movement.right_hand_location["Mouth"])
+        if word["MinorLocation.2.0"].item() in hand_movement.right_hand_location:
+            values = hand_movement.right_hand_location[word["MinorLocation.2.0"].item()]
+            begin.update({'rhx': values[0], 'rhy': values[1], 'rhz': values[2], 'rh': values[3]})
         else:
-            print("IMPLEMENT THIS")
-        if word["SecondMinorLocation.2.0"].item() == "HeadAway":
-            to.update({'rhx': 2, 'rhy': 0, 'rhz':2, 'rh': 3})
+            raise Exception(f"IMPLEMENT {word['MinorLocation.2.0'].item()}")
+        if not pd.isnull(word["SecondMinorLocation.2.0"].item()):
+            if word["SecondMinorLocation.2.0"].item() in hand_movement.right_hand_location:
+                values = hand_movement.right_hand_location[word["SecondMinorLocation.2.0"].item()]
+                to.update({'rhx': values[0], 'rhy': values[1], 'rhz': values[2], 'rh': values[3]})
+            else:
+                raise Exception(f"IMPLEMENT {word['SecondMinorLocation.2.0'].item()}")
+        
     if word["RepeatedMovement.2.0"].item() == 1:
         driver.execute_script(move.move_character([begin, to] * 3, 1000))
     else:
