@@ -1,3 +1,4 @@
+from re import I
 import discord
 import threading
 import nltk
@@ -32,6 +33,15 @@ time_words_file = open('files/time_words.txt', 'r')
 TIME_WORDS = time_words_file.read().split()
 
 PHRASE_ENDS = ['.',',',';',':','?','!']
+
+ADJECTIVES = open('files/list-of-english-adjectives.txt', 'r').read().split()
+VERBS = open('files/list-of-english-verbs.txt', 'r').read().split()
+IRREGULAR_VERBS = open('files/Irregular_verbs.txt', 'r').read().split("\n")
+for i in range(len(IRREGULAR_VERBS)):
+	forms = IRREGULAR_VERBS[i].split()
+	IRREGULAR_VERBS[i] = forms
+
+
 
 GIFToken=open("gifKey.txt").read()
 URL="https://api.giphy.com/v1/gifs/search?api_key="+GIFToken+'&q="'
@@ -96,6 +106,12 @@ def process_content(text):
 		for word in pseudo_ASL:
 			test_word = word[0].lower()
 			test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+			
+			if len(test.index) == 0:
+				if test_word[-1] == "s":
+					test_word = test_word[:-1]
+					test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+			
 
 			if len(test.index) > 0:
 				match = test.loc[test["EntryID"].str.startswith(test_word + "_", 0) & (test["EntryID"].str.endswith("1") | test["EntryID"].str.endswith("2") | test["EntryID"].str.endswith("3")) | (test["EntryID"] == test_word)]
@@ -124,7 +140,6 @@ def process_content(text):
 #	1. Removes words that aren't used in ASL (articles such as "the" or "a", be verbs such as "be" and "am")
 #	2. Adds superlatives (in ASL, "biggest" could be signed as BIG + TOP).  
 # 		Note, this is a naiive approach and should probably be changed at some point.
-#	3. Uses reduplication for plurals (when it encounters a plural noun, such as "dogs", it does the sign twice) TODO
 #	3. Converts superlatives and comparatives to their roots.  For instance, "bigger" --> "big"
 #	4. Checks for word pairs that have a single sign, such as "Good morning" or "Week last" TODO
 #	5. Changes some word ordering, specifically for:
@@ -145,40 +160,64 @@ def pseudo_translate(tagged):
 		if tag[0][1] == 'JJS':
 			words.append(('top','JJ'))
 
-	# TODO Add reduplication of plural nouns
-
 	# convert superlatives and comparatives to their roots (ie "bigger" --> "big")
 	list_words = [None] * len(words)
 	for i in range(len(words)):
 		word = words[i]
-		print(word[0])
-		print(word[1])
-		if word[0][:-2] in ADJECTIVES and word[-2:] == 'er':
+		if word[0][:-2].lower() in ADJECTIVES and (word[0][-2:] == 'er' or word[0][-2:] == 'ly'):
+			print("ENDS WITH ER or LY")
+			list_words[i] = [word[0][:-2], "JJ"]
+		elif word[0][:-3].lower() in ADJECTIVES and word[0][-2:] == 'er':
+			print("ENDS WITH ER")
+			word[0][:-3]
+			list_words[i] = [word[0][:-3], "JJ"]
+		elif (word[0][:-3] + 'y').lower() in ADJECTIVES and word[0][-2:] == 'er':
 			print("ENDS WITH ER")
 			new_word = word[0][:-2]
-			if new_word[-1] == 'i':
-				new_word = new_word[:-1] + 'y'
+			new_word = new_word[:-1] + 'y'
 			list_words[i] = [new_word, "JJ"]
-		elif word[0][-3] in ADJECTIVES and word[-2:] == 'er':
-			print("ENDS WITH ER")
+		elif word[0][:-3].lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
+			list_words[i] = [word[0][:-3], "JJ"]
+		elif word[0][:-4].lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
+			list_words[i] = [word[0][:-4], "JJ"]
+		elif (word[0][:-4] + 'y').lower() in ADJECTIVES and word[0][-3:] == 'est':
+			print("ENDS WITH EST")
 			new_word = word[0][:-3]
-			if new_word[-1] == 'i':
-				new_word = new_word[:-1] + 'y'
-			list_words[i] = [new_word, "JJ"]
-		elif word[0][:-3] in ADJECTIVES and word[-3:] == 'est':
-			new_word = word[0][:-3]
-			if new_word[-1] == 'i':
-				new_word = new_word[:-1] + 'y'
-			list_words[i] = [new_word, "JJ"]
-		elif word[0][-4] in ADJECTIVES and word[-3:] == 'est':
-			new_word = word[0][:-4]
-			if new_word[-1] == 'i':
-				new_word = new_word[:-1] + 'y'
+			new_word = new_word[:-1] + 'y'
 			list_words[i] = [new_word, "JJ"]
 		else:
 			list_words[i] = [word[0], word[1]]
 			
 	# convert verbs to their roots (ie "jumped" --> "jump")
+	for i in range(len(list_words)):
+		word = list_words[i]
+		if word[0][:-2].lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-2], "VB"]
+		elif word[0][:-3].lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-3], "VB"]
+		elif (word[0][:-3] + 'y').lower() in VERBS and word[0][-2:] == 'ed':
+			print("ENDS WITH ED")
+			list_words[i] = [word[0][:-3] + 'y', "VB"]
+		elif word[0][:-3].lower() in VERBS and word[0][-3:] == 'ing':
+			print("ENDS WITH ing")
+			list_words[i] = [word[0][:-3], "VB"]
+		elif word[0][:-4].lower() in VERBS and word[0][-3:] == 'ing':
+			print("ENDS WITH ing")
+			list_words[i] = [word[0][:-4], "VB"]
+
+	# convert irregular verbs to infinitives
+	for i in range(len(list_words)):
+		word = list_words[i][0].lower()
+		for j in range(len(IRREGULAR_VERBS)):
+			if IRREGULAR_VERBS[j][1] == word or IRREGULAR_VERBS[j][2] == word:
+				print("IRREGULAR")
+				list_words[i] = [IRREGULAR_VERBS[j][0], "VB"]
+		
+
 
 	# TODO check for word pairs
 
