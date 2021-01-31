@@ -6,6 +6,7 @@
     + [Quick Set Up](#quick-set-up)
     + [Invite The Bot To Your Discord Server](#invite-the-bot-to-your-discord-server)
     + [ASL Discord Bot Documentation](#asl-discord-bot-documentation)
+    + [Audio Recorder Helper Bot](#helper-bot-audio-recorder)
     + [Natural Language Processing](#natural-language-processing)
     + [2D Animation](#2d-animation)
     + [ASL Database](#asl-database)
@@ -42,6 +43,10 @@ You will need to have google cloud client libraries configured instructions for 
 (it should display the text on the screen from different users) 
 4. Try running !asl commands to get asl gifs
 5. ASL 2D animation - beta mode
+
+### Helper Audio Bot Recorder 
+[Audio Recorder](https://github.com/SoTrxII/Pandora) 
+Follow the documentation guide there to self-host it via Docker.
 
 ### Natural Language Processing
 Our ASL Bot processes the words in the following way: removes words that aren't used, adds superlatives, converts superlatives to their roots, checks for word pairs (good morning), looks for words that mean time. 
