@@ -111,29 +111,32 @@ def process_content(text):
 		true_ASL = []
 
 		for word in pseudo_ASL:
-			test_word = word[0].lower()
-			test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
-			
-			if len(test.index) == 0:
-				if test_word[-1] == "s":
-					test_word = test_word[:-1]
-					test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
-			
-
-			if len(test.index) > 0:
-				match = test.loc[test["EntryID"].str.startswith(test_word + "_", 0) & (test["EntryID"].str.endswith("1") | test["EntryID"].str.endswith("2") | test["EntryID"].str.endswith("3")) | (test["EntryID"] == test_word)]
-				perfect_match = match.loc[match["LexicalClass"] == word[1]]
-				if len(perfect_match.index) > 0:
-					true_ASL.append(perfect_match["EntryID"].iloc[0])
-					print("perfect")
-				elif len(match.index) > 0:
-					true_ASL.append(match["EntryID"].iloc[0])
-					print("close")
-				else:
-					true_ASL.append(test["EntryID"].iloc[0])
-					print("fallback")
+			if word[0] in ["?","."]:
+				true_ASL.append(word[0])
 			else:
-				print('Not in ASL dictionary')
+				test_word = word[0].lower()
+				test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+				
+				if len(test.index) == 0:
+					if test_word[-1] == "s":
+						test_word = test_word[:-1]
+						test = p.loc[p["EntryID"].str.startswith(test_word + "_", 0) | (p["EntryID"] == test_word)| p["SignBankEnglishTranslations"].str.contains(' ' + test_word + ',') | p["SignBankEnglishTranslations"].str.endswith(" " + test_word) | p["SignBankEnglishTranslations"].str.startswith(test_word + ",")]
+				
+
+				if len(test.index) > 0:
+					match = test.loc[test["EntryID"].str.startswith(test_word + "_", 0) & (test["EntryID"].str.endswith("1") | test["EntryID"].str.endswith("2") | test["EntryID"].str.endswith("3")) | (test["EntryID"] == test_word)]
+					perfect_match = match.loc[match["LexicalClass"] == word[1]]
+					if len(perfect_match.index) > 0:
+						true_ASL.append(perfect_match["EntryID"].iloc[0])
+						print("perfect")
+					elif len(match.index) > 0:
+						true_ASL.append(match["EntryID"].iloc[0])
+						print("close")
+					else:
+						true_ASL.append(test["EntryID"].iloc[0])
+						print("fallback")
+				else:
+					print('Not in ASL dictionary')
 		
 		print(true_ASL)
 				
@@ -234,6 +237,7 @@ def pseudo_translate(tagged):
 			move_to_start_of_sentence(list_words, i)
 		if word[0] == "?":
 			move_to_start_of_sentence(list_words, i)
+			list_words.insert(i+1, [".", "Symbol"])
 
 		i += 1
 
@@ -252,15 +256,16 @@ def pseudo_translate(tagged):
 
 # Takes list of words, and position of word to be moved
 def move_to_start_of_sentence(words, pos):
-	i = pos
-	while (i > 0):
-		if words[i][0] in PHRASE_ENDS:
-			word = words.pop(pos)
-			words.insert(i+1, word)
-			return
-		i -= 1
-	word = words.pop(pos)
-	words.insert(0, word)
+	i = pos - 1
+	if i >= 0:
+		while (i > 0):
+			if words[i][0] in PHRASE_ENDS:
+				word = words.pop(pos)
+				words.insert(i+1, word)
+				return
+			i -= 1
+		word = words.pop(pos)
+		words.insert(0, word)
  
 
 class MyClient(discord.Client):
