@@ -58,6 +58,5 @@ def move_character(instructions: List[Dict[str, float]], time: int) -> str:
             f"{time * i}",'\n',
             ")})();"
         ])
-    print(s)
     return s
 

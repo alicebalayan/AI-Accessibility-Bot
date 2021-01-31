@@ -3,6 +3,7 @@ from pandas.core.frame import DataFrame
 from selenium.webdriver.firefox.webdriver import WebDriver
 from movement import move, hand_movement
 from selenium import webdriver
+from data_points import *
 
 import pandas as pd
 
@@ -26,6 +27,8 @@ def main():
     );
     """)
 
+    points = read_points("points.txt")
+    p = append_points_to_data(p, points)
     
     # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
     while True:
@@ -37,7 +40,7 @@ def main():
 
 def word_to_asl(word: DataFrame) -> None:
     begin, to = dict(), dict()
-    if word["SignType.2.0"].item() == ("OneHanded"):
+    if word["SignType.2.0"].item() == "OneHanded":
         begin.update(hand_movement.bring_right_hand_forward())
         if word["ThumbPosition.2.0"].item() == "Closed":
             begin.update(hand_movement.close_right_thumb())
