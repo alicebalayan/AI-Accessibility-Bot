@@ -259,6 +259,7 @@ def move_to_start_of_sentence(words, pos):
  
 
 class MyClient(discord.Client):
+
 	async def on_ready(self):
 		print(f'{self.user} has connected to Discord!')
 		print('Servers connected to:')
@@ -290,7 +291,40 @@ class MyClient(discord.Client):
 				await message.channel.send("error")
 				servers[guild]={}
 				return	
+	async def stop_and_process(self,message):
+		
+		global servers
+		guild=message.guild
+		debug_channel = self.get_channel(805477547755175977)
+
+
+		url="http://localhost:3004/"+servers[guild]["recordingID"]+"?format=flac&container=aupzip"
+   
+		r = requests.get(url, allow_redirects=True)
+		open('recording.zip', 'wb').write(r.content)
+		with zipfile.ZipFile('recording.zip', 'r') as zip_ref:
+			zip_ref.extractall("recording")
+		os.remove("recording.zip")
+		path="recording/"+servers[guild]["recordingID"]+"_data/"
+		listOfFiles=glob.glob(path+'*.ogg')
+		print(listOfFiles)
+		for rec in listOfFiles:
+			username=rec[rec.index("-")+1:]
+			username=username[:username.index("_")]
+				# print(username)
+				# print(transcribe_file(rec))
+			result=transcribe_file(rec)
+			paragraph =username+" said "
+			if len(result) == 0:
+				continue
+			for sentence in result:
+				paragraph +=sentence+" "
+			# paragraph +=" "+str(len(result))
+			process_content(paragraph)
+			# TODO remove this later just here for debug
+			await debug_channel.send(paragraph)
 	async def on_message(self,message):	
+
 		global servers
 		guild=message.guild
 
@@ -330,21 +364,12 @@ class MyClient(discord.Client):
 			servers[guild]["recordingID"]=""
 		if message.content.startswith("!stop"):
 			await message.channel.send(".end")
-			url="http://localhost:3004/"+servers[guild]["recordingID"]+"?format=flac&container=aupzip"
-   
-			r = requests.get(url, allow_redirects=True)
-			open('recording.zip', 'wb').write(r.content)
-			with zipfile.ZipFile('recording.zip', 'r') as zip_ref:
-				zip_ref.extractall("recording")
-			os.remove("recording.zip")
-			path="recording/"+servers[guild]["recordingID"]+"_data/"
-			listOfFiles=glob.glob(path+'*.ogg')
-			print(listOfFiles)
-			for rec in listOfFiles:
-				username=rec[rec.index("-")+1:rec.index("_")-1]
-				print(username)
-				print(transcribe_file(rec))
-				
+			await self.stop_and_process(message)
+
+		if message.content.startswith("!next"):
+			await message.channel.send(".end")
+			await self.stop_and_process(message)
+			await message.channel.send(".record")
 		if "Starting record with id : " in message.content:
 			index=message.content.index("id : ")
 			print(message.content[index+len("id : "):])
