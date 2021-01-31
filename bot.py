@@ -227,10 +227,15 @@ def pseudo_translate(tagged):
 		
 
 	# Change time ordering 
-	for i in range(len(list_words)):
+	i = 0
+	while(i < len(list_words)):
 		word = list_words[i]
 		if word[0] in TIME_WORDS:
 			move_to_start_of_sentence(list_words, i)
+		if word[0] == "?":
+			move_to_start_of_sentence(list_words, i)
+
+		i += 1
 
 	# Convert Parts of Speech to Lexical Classes
 	return_words = []
