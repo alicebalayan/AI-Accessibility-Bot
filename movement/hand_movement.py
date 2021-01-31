@@ -68,4 +68,85 @@ alphabet = {
         "rrz": -100
     },
 
+     "R": {
+        "ri0":  0, "ri1":  0, "ri2":  0.3, "ris":  -.5,                         #index
+        "rm0":  0, "rm1":  0, "rm2":  -.6, "rms":  1.5,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "S": {
+        "ri0":  1, "ri1":  1, "ri2":  1, "ris":  0,                         #index
+        "rm0":  1, "rm1":  1, "rm2":  1, "rms":  0,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": .2, "rt2x": -.4,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "T": {
+        "ri0":  1, "ri1":  1, "ri2":  1, "ris":  0,                         #index
+        "rm0":  1, "rm1":  1, "rm2":  1, "rms":  0,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": -.2, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "U": {
+        "ri0":  0, "ri1":  0, "ri2":  0, "ris":  .5,                         #index
+        "rm0":  0, "rm1":  0, "rm2":  0, "rms":  1.5,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "V": {
+        "ri0":  0, "ri1":  0, "ri2":  0, "ris":  .5,                         #index
+        "rm0":  0, "rm1":  0, "rm2":  0, "rms":  0,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "W": {
+        "ri0":  0, "ri1":  0, "ri2":  0, "ris":  .5,                         #index
+        "rm0":  0, "rm1":  0, "rm2":  0, "rms":  0,                         #middle
+        "rr0":  0, "rr1":  0, "rr2":  0, "rrs":  1,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 80, "rry": -40
+    },
+
+    "X": {
+        "ri0":  0, "ri1":  .5, "ri2":  1, "ris":  0,                         #index
+        "rm0":  1, "rm1":  1, "rm2":  1, "rms":  0,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0,     #thumb
+        "rrz": -70, "rrx": 60, "rry": -40
+    },
+
+    "Y": {
+        "ri0":  1, "ri1":  1, "ri2":  1, "ris":  0,                         #index
+        "rm0":  1, "rm1":  1, "rm2":  1, "rms":  1,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  1,                         #ring
+        "rp0":  0, "rp1":  0, "rp2":  0, "rps":  1,                         #pinky
+        "rt0x": -1, "rt0y": 0, "rt1x": -1, "rt1y": 0, "rt2x": 0,            #thumb
+        "rrz": -70, "rrx": 80, "rry": -30
+    },
+
+    "Z": {
+        "ri0":  0, "ri1":  0, "ri2":  0, "ris":  0,                         #index
+        "rm0":  1, "rm1":  1, "rm2":  1, "rms":  0,                         #middle
+        "rr0":  1, "rr1":  1, "rr2":  1, "rrs":  0,                         #ring
+        "rp0":  1, "rp1":  1, "rp2":  1, "rps":  0,                         #pinky
+        "rt0x": -0.75, "rt0y": 0.75, "rt1x": 0.6, "rt1y": 0, "rt2x": 0, #thumb
+        "rrz": -70, "rrx": 60, "rry": -30
+    }
+
 }
