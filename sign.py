@@ -9,9 +9,8 @@ import pandas as pd
 
 driver = webdriver.Firefox()
 
-def main(): 
-    p = pd.read_csv("signdata.csv", encoding='ISO-8859-1')
-    hello = p.loc[p["EntryID"] == "hello"] 
+
+def startup(): 
     driver.get("http://aslfont.github.io/sign-puppet/demo/#forward")
     driver.execute_script("""
     var animator = puppet.getAnimator();
@@ -26,30 +25,34 @@ def main():
     100 // 10 frames per second
     );
     """)
+    
+    #driver.close() TODO add this at some point
+
+def make_moves(words):
+    # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
+    p = pd.read_csv("signdata.csv", encoding='ISO-8859-1')
 
     points = read_points("files/points.txt")
-    print(points)
     p["Positions"] = None
     for i, k in enumerate(points):
         p["Positions"][100 + i] = k
-    
-    print(p["Positions"].iloc[100:200])
-    
-    # driver.execute_script(move.move_character([hand_movement.close_right_thumb()], 1500))
-    while True:
+
+    for to_parse in words:
         driver.execute_script(move.move_character([move.set_default_pose()], 1000))
-        to_parse = input()
+        # to_parse = input()
         word = p.loc[p["EntryID"] == to_parse] 
         if len(word.index) > 0:
             word_to_asl(word)
         else:
             fingerspell(to_parse)
     # driver.execute_script(move.move_character(move.set_default_pose(), 1500))
-    driver.close()
+
 
 def word_to_asl(word: DataFrame) -> None:
     #TODO add LH positions
+    print(word["EntryID"].item())
     if word["Positions"].item() == None:
+        print("here")
         begin, to = dict(), dict()
         begin.update(hand_movement.bring_right_hand_forward())
         if word["ThumbPosition.2.0"].item() == "Closed":
@@ -93,8 +96,6 @@ def word_to_asl(word: DataFrame) -> None:
             locations[0].update(hand_movement.letter_animate('r', lhand_shape.upper()))
         else:
             locations[0].update(hand_movement.letter_animate('l', 'B'))
-
-        print(positions)
         
         for i in range(len(positions[0])):
             rhposition = positions[0][i]
@@ -171,4 +172,4 @@ def read_points(file_name: str):
 #            - () coords
 
 if __name__ == "__main__":
-    main()
+    startup()

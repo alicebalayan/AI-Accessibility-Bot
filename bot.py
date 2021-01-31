@@ -18,6 +18,7 @@ import zipfile
 import os
 import glob
 from transcribe import transcribe_file
+from sign import *
 
 
 import pandas as pd
@@ -128,17 +129,18 @@ def process_content(text):
 					perfect_match = match.loc[match["LexicalClass"] == word[1]]
 					if len(perfect_match.index) > 0:
 						true_ASL.append(perfect_match["EntryID"].iloc[0])
-						print("perfect")
+					#	print("perfect")
 					elif len(match.index) > 0:
 						true_ASL.append(match["EntryID"].iloc[0])
-						print("close")
+					#	print("close")
 					else:
 						true_ASL.append(test["EntryID"].iloc[0])
-						print("fallback")
+					#	print("fallback")
 				else:
-					print('Not in ASL dictionary')
-		
+				#	print('Not in ASL dictionary')
+					pass
 		print(true_ASL)
+		make_moves(true_ASL)
 				
 
 			#test[["EntryID", "LexicalClass"]]
@@ -275,6 +277,7 @@ class MyClient(discord.Client):
 		print('Servers connected to:')
 		for server in client.guilds:
 			print(server)
+		startup()
 	async def join(self,message):
 		global servers
 		guild=message.guild
